@@ -4,9 +4,11 @@ const app = express();
 app.use(express.json());
 require("dotenv").config();
 
+const PORT = process.env.PORT;
+
 const adminRouter = require("./route/admin.router");
  app.use("/api/v1", adminRouter);
-const PORT =2024
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL, {
@@ -24,7 +26,3 @@ app.listen(PORT, () => {
 });
 
 connectDB();
-
-// app.get("/", function (req, res, next) {
-//  res.send("Hello World!");
-// });
