@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const adminSchema = new Schema({
-  name: {
+const DrinksSchema = new Schema({
+  DrinksName: {
     type: String,
     required: true
   },
@@ -21,7 +21,7 @@ const adminSchema = new Schema({
 });
 
 
-const AdminModel = mongoose.model("Admin", adminSchema);
+const DrinksModel = mongoose.model("Drinks", DrinksSchema);
 
 
-module.exports = AdminModel;
+module.exports = DrinksModel;

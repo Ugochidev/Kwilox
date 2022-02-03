@@ -6,8 +6,10 @@ require("dotenv").config();
 
 const PORT = process.env.PORT;
 
-const adminRouter = require("./route/admin.router");
+const adminRouter = require("./routes/admin.route");
  app.use("/api/v1", adminRouter);
+ DrinksRouter = require("./routes/Drinks.route");
+app.use("/api/v1", DrinksRouter)
 
 const connectDB = async () => {
   try {
@@ -22,7 +24,7 @@ const connectDB = async () => {
 };
 
 app.listen(PORT, () => {
-  console.log(`App is listening on PORT ${PORT}`);
+  console.log(`App is listening t0 PORT ${PORT}`);
 });
 
 connectDB();
