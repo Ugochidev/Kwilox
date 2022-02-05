@@ -1,13 +1,13 @@
 const Goods = require("../models/Drinks.model");
 const mongoose = require("mongoose");
 
-exports.addGoods = async (req, res, next) => {
+exports.addGoods = async(req, res, next) => {
   try {
-    const { Drinksname, manufacturerCompany, quantityAvailable, expiryDate } =
-      req.body;
+    const { DrinksName, manufacturerCompany, quantityAvailable, expiryDate } =
+      req.body
 
     const newGoods = new Goods({
-      Drinksname,
+      DrinksName,
       manufacturerCompany,
       quantityAvailable,
       expiryDate,
