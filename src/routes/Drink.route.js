@@ -1,8 +1,8 @@
 const express = require("express");
-const Drinks = require("../controllers/Drink.controller");
+const Drink = require("../controllers/Drink.controller");
 const router = express.Router();
-router.post("/addGoods", Drinks.addGoods);
-router.get("/fetchGoods", Drinks.fetchGoods);
-router.patch("/updateGoods/:_id", Drinks.updateGoods);
-router.delete("/removeGoods/:id", Drinks.deleteGoods);
+router.post("/addGoods", Drink.addGoods);
+router.get("/fetchGoods", Drink.fetchGoods);
+router.patch("/updateGoods/:_id", Drink.updateGoods);
+router.delete("/removeGoods/:id", Drink.deleteGoods);
 module.exports = router;

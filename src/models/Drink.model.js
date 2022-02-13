@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const DrinksSchema = new Schema({
-  DrinksName: {
+const DrinkSchema = new Schema({
+  DrinkName: {
     type: String,
     required: true
   },
@@ -21,7 +21,7 @@ const DrinksSchema = new Schema({
 });
 
 
-const DrinksModel = mongoose.model("Drinks", DrinksSchema);
+const DrinkModel = mongoose.model("Drinks", DrinkSchema);
 
 
-module.exports = DrinksModel;
+module.exports = DrinkModel;

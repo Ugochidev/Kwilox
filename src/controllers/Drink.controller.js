@@ -1,78 +1,83 @@
-const Goods = require("../models/Drinks.model");
+const Goods = require("../models/Drink.model");
 const mongoose = require("mongoose");
 
-exports.addGoods = async(req, res, next) => {
+//  Posting goods to the database
+
+exports.addGoods = async (req, res, next) => {
   try {
-    const { DrinksName, manufacturerCompany, quantityAvailable, expiryDate } =
-      req.body
+    const { DrinkName, manufacturerCompany, quantityAvailable, expiryDate } =
+      req.body;
+    if (
+      !DrinkName ||
+      !manufacturerCompany ||
+      !quantityAvailable ||
+      !expiryDate
+    ) {
+      return res.status(401).json({
+        message: "Please fill all the required field",
+      });
+    }
 
     const newGoods = new Goods({
-      DrinksName,
+      DrinkName,
       manufacturerCompany,
       quantityAvailable,
       expiryDate,
     });
     await newGoods.save();
     return res.status(201).json({
-      success: true,
       newGoods,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({
-      success: false,
-      message: "OOPS Error",
-    });
-  }
-};
-exports.fetchGoods = async (req, res, next) => {
-  try {
-    const fetchGoods = await Goods.find();
-    return res.status(200).json({
-      success: true,
-      fetchGoods,
-    });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({
-      success: false,
-      message: "Server Error",
+      message: error.message,
     });
   }
 };
 
-exports.updateGoods = async (req, res, next) => {
+//  Getting goods from the database
+
+exports.fetchGoods = async (req, res, next) => {
   try {
-    const { _id } = req.params;
-    const goodsUpdate = await Goods.findOneAndUpdate({ _id: _id }, req.body, {
-      new: true,
-    });
+    const fetchGoods = await Goods.find();
     return res.status(200).json({
-      success: true,
-      goodsUpdate,
+      fetchGoods,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({
-      success: false,
-      message: "Server Error",
+      message: error.message,
     });
   }
 };
+
+//  Updating/editting goods in the database
+
+exports.updateGoods = async (req, res, next) => {
+  try {
+    const { _id } = req.params;
+    const goodsUpdate = await Goods.findOneAndUpdate({ _id: _id }, req.body);
+    return res.status(200).json({
+      goodsUpdate,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+//  deleting goods in the database
 
 exports.deleteGoods = async (req, res, next) => {
   try {
     const { id } = req.params;
     const removeGoods = await Goods.findOneAndDelete({ _id: id });
     return res.status(200).json({
-      success: true,
-      removeGoods,
+      message: "goods deleted successfully",
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({
-      success: false,
-      message: "Server Error",
+      message: error.message,
     });
   }
 };

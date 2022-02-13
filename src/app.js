@@ -6,8 +6,8 @@ require("dotenv").config();
 
 const PORT = process.env.PORT;
 
-const adminRouter = require("./routes/Drink.route");
- app.use("/api/v1", adminRouter);
+const DrinkRouter = require("./routes/Drink.route");
+app.use("/api/v1", DrinkRouter);
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL, {
