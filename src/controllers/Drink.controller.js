@@ -54,8 +54,10 @@ exports.fetchGoods = async (req, res, next) => {
 
 exports.updateGoods = async (req, res, next) => {
   try {
-    const { _id } = req.params;
-    const goodsUpdate = await Goods.findOneAndUpdate({ _id: _id }, req.body);
+    const { _id } = req.query;
+    const goodsUpdate = await Goods.findOneAndUpdate({ _id }, req.body, {
+      new: true,
+    });
     return res.status(200).json({
       goodsUpdate,
     });
@@ -70,8 +72,8 @@ exports.updateGoods = async (req, res, next) => {
 
 exports.deleteGoods = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const removeGoods = await Goods.findOneAndDelete({ _id: id });
+    const { _id } = req.query;
+    const removeGoods = await Goods.findOneAndDelete({ _id });
     return res.status(200).json({
       message: "goods deleted successfully",
     });
